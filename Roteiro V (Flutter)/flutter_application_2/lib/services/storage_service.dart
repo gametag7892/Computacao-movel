@@ -3,19 +3,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 class StorageService {
   static const String key = 'tasks';
 
-  // Criação da função clearTasks para o exercicio 1
-  Future<void> clearTasks() async {
-    final perfs = await SharedPreferences.getInstance();
-    await perfs.clear();
+  // Método para SALVAR [cite: 106]
+  Future<void> saveTasks(List<String> tasks) async {
+    final prefs = await SharedPreferences.getInstance(); // [cite: 108]
+    await prefs.setStringList(key, tasks); // [cite: 109]
   }
 
-  Future<void> saveTasks(String tasks) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(key, tasks);
-  }
-
-  Future<String> loadTasks() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key) ?? "";
+  // Método para CARREGAR [cite: 110]
+  Future<List<String>> loadTasks() async {
+    final prefs = await SharedPreferences.getInstance(); // [cite: 111]
+    return prefs.getStringList(key) ?? []; // [cite: 112, 129]
   }
 }
