@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
 class TaskTile extends StatelessWidget {
-  final String nome;
-  final String status;
+  final String taskName;
+  final VoidCallback onDelete;
 
-  const TaskTile({super.key, required this.nome, required this.status});
-  
+  const TaskTile({super.key, required this.taskName, required this.onDelete});
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        nome,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+      title: Text(taskName),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete, color: Colors.red),
+        onPressed: onDelete,
       ),
-      subtitle: Text(status),
-      trailing: const Icon(Icons.chevron_right),
     );
   }
 }
